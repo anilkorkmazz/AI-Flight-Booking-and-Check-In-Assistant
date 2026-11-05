@@ -25,8 +25,10 @@ namespace backend_gateway.Services
 
             var loginPayload = new LoginRequestDto
             {
-                Username = "admin",
-                Password = "123"
+                 Username = _config["AirlineApi:Username"]
+                     ?? throw new InvalidOperationException("Airline API username is not configured"),
+                Password = _config["AirlineApi:Password"]
+                    ?? throw new InvalidOperationException("Airline API password is not configured")
             };
 
             var loginUrl = $"{_config["Gateway:BaseUrl"]}/api/login";  
